@@ -1,0 +1,272 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideUp {
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes openRight {
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes scale {
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes z-index {
+  to {
+    z-index: 20;
+  }
+}
+
+*,
+*::before,
+*::after {
+  font-family: Montserrat;
+  box-sizing: border-box;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.slideshow {
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+}
+
+.slideshow > .slide {
+  width: 100vw;
+  height: 100vh;
+  padding-right: 25px;
+  position: relative;
+}
+
+.slideshow-vertical {
+  flex-direction: column;
+}
+
+.slideshow-horizontal {
+  flex-direction: row;
+}
+
+.slide:nth-child(1) {
+  display: flex;
+}
+
+.slide:nth-child(1) > * {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.title > * {
+  opacity: 0;
+  transform: translateY(25px);
+}
+
+.slide.seen .title > * {
+  animation: fadeIn 750ms ease-out forwards, slideUp 750ms ease-out forwards;
+  animation-delay: 500ms;
+}
+
+.slide.seen .position {
+  font-size: 0.5em;
+  animation-delay: 1250ms;
+}
+
+.profile img {
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateX(50px);
+}
+
+.slide.seen .profile img {
+  animation: fadeIn 750ms ease-out forwards, slideLeft 750ms ease-out forwards;
+  animation-delay: 2500ms;
+}
+
+.introduction-heading {
+  position: relative;
+  width: max-content;
+  font-size: 2em;
+}
+
+.slide:nth-child(2) > .right > .top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide .introduction-heading::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  transform-origin: right;
+}
+
+.slide.seen .introduction-heading::before {
+  animation: openRight 1500ms linear forwards;
+}
+
+.slide:nth-child(2) {
+  display: grid;
+  grid-template-columns: 3fr 4fr;
+}
+
+.slide:nth-child(2) > .right {
+  display: grid;
+  grid-template-rows: 1fr 3fr;
+}
+
+.slide:nth-child(2) > .right > .bottom {
+  opacity: 0;
+  text-indent: 50px;
+}
+
+.slide.seen > .right > .bottom {
+  animation: fadeIn 750ms linear forwards;
+  animation-delay: 1750ms;
+  line-height: 1.6;
+}
+
+.circle-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.circle-background__circle {
+  position: absolute;
+  background: linear-gradient(40deg, gray, #ddd);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: scale(0);
+}
+
+.slide.seen .circle-background__circle {
+  animation: scale 500ms linear forwards;
+  animation-delay: 500ms;
+}
+
+.slide:nth-child(3) {
+  padding-top: 25px;
+}
+
+.skills-heading {
+  font-size: 2.5em;
+  margin-left: 85px;
+  padding-bottom: 10px;
+}
+
+.skills {
+  transform: translateX(-35px);
+  -moz-column-count: 6;
+  -moz-column-gap: 50px;
+  -webkit-column-count: 6;
+  -webkit-column-gap: 50px;
+  column-count: 6;
+  column-gap: 50px;
+  width: max-content;
+  padding: 0;
+  margin-top: 20px;
+  margin-left: 100px;
+  list-style-type: none;
+  overflow: visible;
+}
+
+.skill {
+  overflow-x: initial;
+  position: relative;
+  font-size: 1.4em;
+  text-align: center;
+  border: 1px solid black;
+  padding: 0.5em;
+  transition: transform 75ms linear, box-shadow 75ms linear;
+}
+
+.skill:hover {
+  transform: scale(1.03);
+  box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.25);
+}
+
+.skill:not(:first-child) {
+  margin-top: 10px;
+}
+
+.project__title {
+  position: absolute;
+  font-size: 3em;
+  color: white;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.slide:nth-child(4) {
+  overflow: hidden;
+}
+
+.slide.seen .project__title {
+  animation: fadeOut 1s linear forwards;
+  animation-delay: 3s;
+}
+
+.slide.seen .project__frame {
+  animation: z-index 0ms linear forwards;
+  animation-delay: 4s;
+}
+
+.project__frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+}
