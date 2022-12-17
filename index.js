@@ -16,7 +16,7 @@ const updateSlideSeen = () => {
     slide = Math.ceil(html.scrollTop / slides[0].offsetHeight);
   } else if (html.scrollTop < prevScrollTop) {
     slide = Math.floor(html.scrollTop / slides[0].offsetHeight);
-  }
+  } else return;
   prevScrollTop = html.scrollTop;
   if (slide !== currSlide) {
     currSlide = slide;
@@ -29,7 +29,10 @@ const setSlideSeen = () => {
 };
 
 const scrollToCurrSlide = () => {
-  html.scrollTop = slides[0].offsetHeight * currSlide;
+  window.scrollTo({
+    top: slides[0].offsetHeight * currSlide,
+    behavior: "smooth",
+  });
 };
 
 const random = (min, max) => min + Math.random() * (max - min);
@@ -44,6 +47,7 @@ const initializeCircleBackground = () => {
     const top = Math.random() * circleBackground.clientHeight;
     circle.style.left = left + "px";
     circle.style.bottom = top + "px";
+    circle.style.rotate = Math.random() * 360 + "deg";
     circleBackground.appendChild(circle);
   }
 };
@@ -56,10 +60,6 @@ const init = () => {
 document.addEventListener("scroll", () => {
   updateSlideSeen();
   setSlideSeen();
-});
-
-document.querySelector("iframe").addEventListener("load", () => {
-  console.log("IFrame Loaded ⚡");
 });
 
 init();
